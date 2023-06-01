@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -9,12 +9,12 @@ export const GlobalStyles = createGlobalStyle`
 
   :focus {
     outline: 0;
-    box-shadow: 0 0 0 2px ${(props) => props.theme['purple']};
+    box-shadow: 0 0 0 2px ${(props) => props.theme.purple};
   }
 
   body {
-    background: ${(props) => props.theme['background']};
-    color: ${(props) => props.theme["base-text"]};
+    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme['base-text']};
     -webkit-font-smoothing: antialiased;
   }
 
@@ -22,5 +22,29 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1rem;
+  }
+
+  button {
+    cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    border: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Baloo 2', cursive;
+    color: ${(props) => props.theme['base-title']};
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 130%;
   }
 `
