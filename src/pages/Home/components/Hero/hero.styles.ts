@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const HeroContainer = styled.section`
+  padding: 5rem 0;
   display: flex;
   justify-content: space-between;
 

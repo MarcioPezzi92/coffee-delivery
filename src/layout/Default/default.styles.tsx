@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const LayoutContainer = styled.div`
   margin: 0 0.5rem;
+  padding-bottom: 6rem;
 
   background: ${(props) => props.theme.background};
 

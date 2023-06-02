@@ -40,11 +40,20 @@ export const GlobalStyles = createGlobalStyle`
   h1, h2, h3 {
     font-family: 'Baloo 2', cursive;
     color: ${(props) => props.theme['base-title']};
+    font-weight: 800;
+    line-height: 130%;
   }
 
   h1 {
     font-size: 3rem;
-    font-weight: 800;
-    line-height: 130%;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
   }
 `

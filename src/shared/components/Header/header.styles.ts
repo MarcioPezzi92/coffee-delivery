@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
-  margin-bottom: 2.5rem;
   padding: 2rem 0;
 
   display: flex;

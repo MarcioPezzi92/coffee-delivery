@@ -5,8 +5,8 @@ import {
   ShoppingCartButton,
 } from './header.styles'
 import Logo from '../../../assets/images/logo.svg'
-import LocationIcon from '../../../assets/icons/location-icon.svg'
-import ShoppingCartIcon from '../../../assets/icons/shopping-cart-icon.svg'
+import { MapPin, ShoppingCart } from 'phosphor-react'
+import { defaultTheme } from '../../../styles/themes/default'
 
 export function HeaderComponent() {
   return (
@@ -14,11 +14,15 @@ export function HeaderComponent() {
       <img src={Logo} alt="Image: brand logo" />
       <ActionsContainer>
         <LocationButton>
-          <img src={LocationIcon} alt="Icon: location illustration" />
+          <MapPin weight="fill" color={defaultTheme.purple} size={22} />
           <span>Rio de Janeiro, RJ</span>
         </LocationButton>
         <ShoppingCartButton>
-          <img src={ShoppingCartIcon} alt="Icon: shopping cart" />
+          <ShoppingCart
+            weight="fill"
+            color={defaultTheme['yellow-dark']}
+            size={22}
+          />
           <span>5</span>
         </ShoppingCartButton>
       </ActionsContainer>
