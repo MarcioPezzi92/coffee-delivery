@@ -9,7 +9,7 @@ export const ProductListContainer = styled.section`
     gap: 2rem;
   }
 `
-export const ProductCard = styled.div`
+export const ProductCardContainer = styled.div`
   margin-top: 0.5rem;
   padding: 0 20px;
 
@@ -21,6 +21,7 @@ export const ProductCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .product-type {
     margin-top: 0.75rem;
     padding: 4px 8px;
@@ -48,50 +49,25 @@ export const ProductCard = styled.div`
     line-height: 18.2px;
     color: ${(props) => props.theme['base-label']};
   }
-`
-export const AmountControl = styled.div`
-  margin: 1.25rem 0.25rem 1.25rem 0.25rem;
 
-  width: 100%;
+  .actions {
+    margin: 1.25rem 0.25rem 1.25rem 0.25rem;
 
-  display: flex;
-  align-items: center;
-
-  .price {
-    flex: 1;
-    .currency {
-      font-size: 14px;
-    }
-    .value {
-      font-family: 'Baloo 2', cursive;
-      font-size: 24px;
-      font-weight: 800;
-    }
-  }
-
-  .control {
-    border-radius: 6px;
-    background: ${(props) => props.theme['base-button']};
+    width: 100%;
 
     display: flex;
     align-items: center;
-    button {
-      padding: 0 8px;
 
-      background: transparent;
-      color: ${(props) => props.theme.purple};
-
-      display: flex;
-      align-items: center;
-
-      :hover {
-        color: ${(props) => props.theme['purple-dark']};
+    .price {
+      flex: 1;
+      .currency {
+        font-size: 14px;
       }
-    }
-    span {
-      padding: 8.5px 4px;
-      line-height: 21px;
-      color: ${(props) => props.theme['base-title']};
+      .value {
+        font-family: 'Baloo 2', cursive;
+        font-size: 24px;
+        font-weight: 800;
+      }
     }
   }
 
