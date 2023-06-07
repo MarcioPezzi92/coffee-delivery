@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const AmountControlContainer = styled.div`
+export const QuantityControlContainer = styled.div`
   border-radius: 6px;
   background: ${(props) => props.theme['base-button']};
 
@@ -18,10 +18,18 @@ export const AmountControlContainer = styled.div`
     :hover {
       color: ${(props) => props.theme['purple-dark']};
     }
+
+    :disabled {
+      opacity: 0.6;
+    }
   }
   span {
     padding: 8.5px 4px;
     line-height: 21px;
     color: ${(props) => props.theme['base-title']};
+  }
+  .in-cart {
+    color: ${(props) => props.theme['yellow-dark']};
+    font-weight: 600;
   }
 `

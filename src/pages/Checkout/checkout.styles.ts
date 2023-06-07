@@ -1,106 +1,105 @@
 import styled from 'styled-components'
 
-export const CheckoutPageContainer = styled.main`
+export const OrderForm = styled.form`
   margin-top: 2.5rem;
 
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 2rem;
-
   h3 {
     margin-bottom: 15px;
   }
-`
-export const CustomerDataForm = styled.section`
-  max-width: 640px;
-  width: 100%;
-  form {
+  section.left-side {
+    max-width: 640px;
+    width: 100%;
+
     > div {
       padding: 2.5rem;
       background: ${(props) => props.theme['base-card']};
       border-radius: 6px;
     }
-    .subtitle-container {
+  }
+  .subtitle-container {
+    display: flex;
+    .icon {
+      margin-right: 0.5rem;
+    }
+    .subtitle {
+      margin-bottom: 2px;
+
+      color: ${(props) => props.theme['base-subtitle']};
+      line-height: 130%;
+    }
+    .description {
+      font-size: 14px;
+      line-height: 130%;
+    }
+  }
+  .address-container {
+    margin-bottom: 12px;
+    .fields {
+      margin-top: 2rem;
+
       display: flex;
-      .icon {
-        margin-right: 0.5rem;
+      flex-direction: column;
+      gap: 1rem;
+      .medium-field {
+        max-width: 200px;
       }
-      .subtitle {
-        margin-bottom: 2px;
+      input {
+        padding: 12px;
 
-        color: ${(props) => props.theme['base-subtitle']};
-        line-height: 130%;
-      }
-      .description {
-        font-size: 14px;
-        line-height: 130%;
-      }
-    }
-    .address-container {
-      margin-bottom: 12px;
-      .fields {
-        margin-top: 2rem;
+        background: ${(props) => props.theme['base-input']};
+        border: 1px solid ${(props) => props.theme['base-button']};
+        border-radius: 4px;
+        color: ${(props) => props.theme['base-text']};
 
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        .medium-field {
-          max-width: 200px;
+        ::placeholder {
+          color: ${(props) => props.theme['base-label']};
         }
-        input {
-          padding: 12px;
 
-          background: ${(props) => props.theme['base-input']};
-          border: 1px solid ${(props) => props.theme['base-button']};
-          border-radius: 4px;
-          color: ${(props) => props.theme['base-text']};
-
-          ::placeholder {
-            color: ${(props) => props.theme['base-label']};
-          }
-
-          :focus {
-            border: 1px solid ${(props) => props.theme['yellow-dark']};
-          }
-        }
-        span {
-          display: flex;
-          gap: 12px;
+        :focus {
+          border: 1px solid ${(props) => props.theme['yellow-dark']};
         }
       }
-    }
-    .payment-container {
-      .buttons-container {
-        margin-top: 2rem;
-
+      span {
         display: flex;
         gap: 12px;
-        button {
-          padding: 1rem;
+      }
+    }
+  }
+  .payment-container {
+    .buttons-container {
+      margin-top: 2rem;
 
-          max-width: 178.67px;
-          width: 100%;
+      display: flex;
+      gap: 12px;
+      button {
+        padding: 1rem;
 
-          background: ${(props) => props.theme['base-button']};
-          border-radius: 6px;
+        max-width: 178.67px;
+        width: 100%;
 
-          font-size: 12px;
-          color: ${(props) => props.theme['base-text']};
-          text-transform: uppercase;
+        background: ${(props) => props.theme['base-button']};
+        border-radius: 6px;
 
-          display: flex;
-          align-items: center;
-          gap: 12px;
+        font-size: 12px;
+        color: ${(props) => props.theme['base-text']};
+        text-transform: uppercase;
 
-          :hover {
-            background: ${(props) => props.theme['base-hover']};
-            color: ${(props) => props.theme['base-subtitle']};
-          }
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        :not(.selected-payment):hover {
+          background: ${(props) => props.theme['base-hover']};
+          color: ${(props) => props.theme['base-subtitle']};
         }
-        .selected {
-          border-color: ${(props) => props.theme.purple};
-          background: ${(props) => props.theme['purple-light']};
-        }
+      }
+      .selected-payment {
+        border: 1px solid ${(props) => props.theme.purple};
+        background: ${(props) => props.theme['purple-light']};
       }
     }
   }
@@ -116,9 +115,9 @@ export const ProductSelection = styled.section`
 
     display: flex;
     flex-direction: column;
-    gap: 24px;
 
-    button.confirm {
+    .confirm {
+      margin-top: 2rem;
       padding: 12px 8px;
 
       background: ${(props) => props.theme.yellow};
@@ -132,12 +131,17 @@ export const ProductSelection = styled.section`
       :hover {
         background: ${(props) => props.theme['yellow-dark']};
       }
+
+      :disabled {
+        opacity: 0.6;
+      }
     }
   }
 `
 
 export const Product = styled.li`
   padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 
   border-bottom: 1px solid ${(props) => props.theme['base-button']};
 

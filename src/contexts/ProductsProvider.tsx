@@ -13,16 +13,16 @@ export type ProductType = {
 
 const initState: ProductType[] = []
 
-export type UseProductsContextType = { products: ProductType[] }
+export type UseProductsContextType = { catalog: ProductType[] }
 
-const initContextState: UseProductsContextType = { products: [] }
+const initContextState: UseProductsContextType = { catalog: [] }
 
 const ProductsContext = createContext<UseProductsContextType>(initContextState)
 
 type ChildrenType = { children?: ReactElement | ReactElement[] }
 
 function getProductCardsFromMock(): ProductType[] {
-  const products = productsMock.map((product) => {
+  const catalog = productsMock.map((product) => {
     const { classification, description, name, picture } = product
 
     return {
@@ -35,9 +35,9 @@ function getProductCardsFromMock(): ProductType[] {
     }
   })
 
-  storeCatalog(products)
+  storeCatalog(catalog)
 
-  return products
+  return catalog
 }
 
 function getProductCardsFromLocalStorage(): ProductType[] | null {
@@ -57,7 +57,7 @@ function storeCatalog(catalog: ProductType[]) {
 }
 
 export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
-  const [products, setProducts] = useState<ProductType[]>(initState)
+  const [catalog, setProducts] = useState<ProductType[]>(initState)
 
   useEffect(() => {
     const storedData = getProductCardsFromLocalStorage()
@@ -65,7 +65,7 @@ export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
   }, [])
 
   return (
-    <ProductsContext.Provider value={{ products }}>
+    <ProductsContext.Provider value={{ catalog }}>
       {children}
     </ProductsContext.Provider>
   )

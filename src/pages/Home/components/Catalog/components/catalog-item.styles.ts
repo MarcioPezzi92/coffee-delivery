@@ -1,15 +1,6 @@
 import styled from 'styled-components'
 
-export const ProductListContainer = styled.section`
-  ul {
-    margin-top: 46px;
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-`
-export const ProductCardContainer = styled.div`
+export const CatalogItemContainer = styled.article`
   margin-top: 0.5rem;
   padding: 0 20px;
 

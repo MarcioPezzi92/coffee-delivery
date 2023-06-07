@@ -2,14 +2,13 @@ import { ReactElement, createContext, useMemo, useReducer } from 'react'
 
 export type CartItemType = {
   id: string
+  picture: string
   name: string
   price: number
   qty: number
 }
 
 type CartStateType = { cart: CartItemType[] }
-
-const initCartState: CartStateType = { cart: [] }
 
 const REDUCER_ACTION_TYPE = {
   ADD: 'ADD',
@@ -34,15 +33,18 @@ const reducer = (
       if (!action.payload) {
         throw new Error('action.payload missing in ADD action')
       }
-      const { id, name, price } = action.payload
+
+      const { id, name, price, picture, qty } = action.payload
       const filteredCart: CartItemType[] = state.cart.filter(
         (item) => item.id !== id,
       )
-      const itemExists: CartItemType | undefined = state.cart.find(
-        (item) => item.id === id,
-      )
-      const qty: number = itemExists ? itemExists.qty + 1 : 1
-      return { ...state, cart: [...filteredCart, { id, name, price, qty }] }
+
+      setCartToStorage([...filteredCart, { id, name, price, qty, picture }])
+
+      return {
+        ...state,
+        cart: [...filteredCart, { id, name, price, qty, picture }],
+      }
     }
     case REDUCER_ACTION_TYPE.REMOVE: {
       if (!action.payload) {
@@ -55,6 +57,8 @@ const reducer = (
         (item) => item.id !== id,
       )
 
+      setCartToStorage([...filteredCart])
+
       return { ...state, cart: [...filteredCart] }
     }
     case REDUCER_ACTION_TYPE.QUANTITY: {
@@ -64,29 +68,42 @@ const reducer = (
 
       const { id, qty } = action.payload
 
-      const itemExists: CartItemType | undefined = state.cart.find(
-        (item) => item.id === id,
+      const updatedCart: CartItemType[] = state.cart.map((item) =>
+        item.id === id ? { ...item, qty } : item,
       )
 
-      if (!itemExists) {
-        throw new Error('Item must exist in order to update quantity')
-      }
-
-      const updatedItem: CartItemType = { ...itemExists, qty }
-
-      const filteredCart: CartItemType[] = state.cart.filter(
-        (item) => item.id !== id,
-      )
-
-      return { ...state, cart: [...filteredCart, updatedItem] }
+      return { ...state, cart: updatedCart }
     }
     case REDUCER_ACTION_TYPE.SUBMIT: {
+      alert('Formulário enviado')
       return { ...state, cart: [] }
     }
     default:
       throw new Error('Unidentified reducer action type')
   }
 }
+
+function setCartToStorage(cart: CartItemType[]) {
+  localStorage.removeItem('@coffee-delivery:cart-state-1.0.0')
+
+  const stateJSON = JSON.stringify(cart)
+
+  localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateJSON)
+}
+
+function getCartFromLocalStorage(): CartItemType[] | undefined {
+  const storedStateAsJSON = localStorage.getItem(
+    '@coffee-delivery:cart-state-1.0.0',
+  )
+  if (storedStateAsJSON) return JSON.parse(storedStateAsJSON)
+  else return undefined
+}
+
+const storedData = getCartFromLocalStorage()
+
+const initCartState: CartStateType = storedData
+  ? { cart: storedData }
+  : { cart: [] }
 
 const useCartContext = (initCartState: CartStateType) => {
   const [state, dispatch] = useReducer(reducer, initCartState)
@@ -99,18 +116,22 @@ const useCartContext = (initCartState: CartStateType) => {
     return previousValue + cartItem.qty
   }, 0)
 
-  const totalPrice = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(
-    state.cart.reduce((previousValue, cartItem) => {
-      return previousValue + cartItem.qty * cartItem.price
-    }, 0),
-  )
+  const deliveryFee: number = 8
+
+  const totalPrice = state.cart.reduce((previousValue, cartItem) => {
+    return previousValue + deliveryFee + cartItem.qty * cartItem.price
+  }, 0)
 
   const cart = state.cart
 
-  return { dispatch, REDUCER_ACTIONS, totalItems, totalPrice, cart }
+  return {
+    dispatch,
+    REDUCER_ACTIONS,
+    totalItems,
+    deliveryFee,
+    totalPrice,
+    cart,
+  }
 }
 
 export type UseCartContextType = ReturnType<typeof useCartContext>
@@ -119,7 +140,8 @@ const initCartContextState: UseCartContextType = {
   dispatch: () => {},
   REDUCER_ACTIONS: REDUCER_ACTION_TYPE,
   totalItems: 0,
-  totalPrice: '',
+  totalPrice: 0,
+  deliveryFee: 0,
   cart: [],
 }
 

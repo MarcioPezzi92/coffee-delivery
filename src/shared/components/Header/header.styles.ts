@@ -15,6 +15,8 @@ export const ActionsContainer = styled.div`
 export const LocationButton = styled.button`
   padding: 0.5rem;
 
+  height: fit-content;
+
   border-radius: 0.375rem;
   background: ${(props) => props.theme['purple-light']};
 
@@ -43,15 +45,18 @@ export const ShoppingCartButton = styled.button`
     top: -7px;
     right: -7px;
 
-    padding: 2px 6px;
+    width: 20px;
+    height: 20px;
 
-    border-radius: 1000px;
+    border-radius: 50%;
     background: ${(props) => props.theme['yellow-dark']};
 
     font-size: 12px;
+    font-weight: 700;
     color: ${(props) => props.theme.white};
 
     display: flex;
+    justify-content: center;
     align-items: center;
   }
 `
