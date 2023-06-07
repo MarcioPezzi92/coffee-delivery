@@ -1,9 +1,9 @@
 import { produce } from 'immer'
-import { SelectedProduct } from '../../contexts/ProductsContext'
 import { ActionTypes } from './actions'
+import { CartItemType } from '../../contexts/CartProvider'
 
 interface Payload {
-  product?: SelectedProduct
+  product?: CartItemType
   amount?: number
   productId?: string
 }
@@ -14,7 +14,7 @@ interface Action {
 }
 
 interface CartState {
-  cart: SelectedProduct[]
+  cart: CartItemType[]
   amount: number
 }
 export function cartReducer(state: CartState, action: Action) {

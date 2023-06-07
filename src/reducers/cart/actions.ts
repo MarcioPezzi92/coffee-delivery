@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { SelectedProduct } from '../../contexts/ProductsContext'
+
+import { CartItemType } from '../../contexts/CartProvider'
 
 export enum ActionTypes {
   ADD_PRODUCT = 'ADD_NEW_PRODUCT',
@@ -7,7 +8,7 @@ export enum ActionTypes {
   REMOVE_PRODUCT = 'REMOVE_PRODUCT',
 }
 
-export function addProduct(product: SelectedProduct) {
+export function addProduct(product: CartItemType) {
   return {
     type: ActionTypes.ADD_PRODUCT,
     payload: { product },
