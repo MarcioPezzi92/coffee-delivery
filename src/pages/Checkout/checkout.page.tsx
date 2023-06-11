@@ -127,7 +127,7 @@ export function CheckoutPage() {
               placeholder="CEP"
               {...register('cep')}
             />
-            {errors.cep && <span>{errors.cep.message}</span>}
+            {errors.cep && <span>CEP no formato 12345-123</span>}
             <input placeholder="Rua" {...register('street')} />
             <span>
               <input
