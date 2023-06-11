@@ -95,18 +95,20 @@ function getCartFromLocalStorage(): CartItemType[] | undefined {
   const storedStateAsJSON = localStorage.getItem(
     '@coffee-delivery:cart-state-1.0.0',
   )
-  if (storedStateAsJSON) return JSON.parse(storedStateAsJSON)
+  if (storedStateAsJSON) {
+    return JSON.parse(storedStateAsJSON)
+  }
   else return undefined
 }
 
 const storedData = getCartFromLocalStorage()
 
-const initCartState: CartStateType = storedData
-  ? { cart: storedData }
-  : { cart: [] }
+console.log("From local storage", storedData)
 
-const useCartContext = (initCartState: CartStateType) => {
-  const [state, dispatch] = useReducer(reducer, initCartState)
+const initialCartState: CartStateType = {cart: storedData || []}
+
+const useCartContext = (initialState: CartStateType) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const REDUCER_ACTIONS = useMemo(() => {
     return REDUCER_ACTION_TYPE
@@ -152,7 +154,7 @@ type ChildrenType = { children?: ReactElement | ReactElement[] }
 
 export const CartProvider = ({ children }: ChildrenType): ReactElement => {
   return (
-    <CartContext.Provider value={useCartContext(initCartState)}>
+    <CartContext.Provider value={useCartContext(initialCartState)}>
       {children}
     </CartContext.Provider>
   )
