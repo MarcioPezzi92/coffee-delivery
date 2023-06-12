@@ -97,15 +97,12 @@ function getCartFromLocalStorage(): CartItemType[] | undefined {
   )
   if (storedStateAsJSON) {
     return JSON.parse(storedStateAsJSON)
-  }
-  else return undefined
+  } else return undefined
 }
 
 const storedData = getCartFromLocalStorage()
 
-console.log("From local storage", storedData)
-
-const initialCartState: CartStateType = {cart: storedData || []}
+const initialCartState: CartStateType = { cart: storedData || [] }
 
 const useCartContext = (initialState: CartStateType) => {
   const [state, dispatch] = useReducer(reducer, initialState)
